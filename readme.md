@@ -4,11 +4,11 @@ A complete Spring Boot application featuring user authentication with PostgreSQL
 
 ## Features
 
-- ✅ User Registration & Login
-- ✅ PostgreSQL Database Integration
-- ✅ Responsive UI with Bootstrap
-- ✅ Real-time Camera Object Detection
-- ✅ TensorFlow.js COCO-SSD Model Integration
+-  User Registration & Login
+-  PostgreSQL Database Integration
+-  Responsive UI with Bootstrap
+-  Real-time Camera Object Detection
+-  TensorFlow.js COCO-SSD Model Integration
 
 ## Prerequisites
 
@@ -132,7 +132,7 @@ server.port=8081
 
 ## Security Notes
 
-⚠️ **Development Only:** This implementation uses plain text passwords. For production:
+⚠ **Development Only:** This implementation uses plain text passwords. For production:
 - Implement password hashing (BCrypt)
 - Add CSRF protection
 - Use HTTPS encryption
