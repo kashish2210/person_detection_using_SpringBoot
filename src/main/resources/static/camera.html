@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Detection</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #121212;
+      color: white;
+    }
+    video {
+      border: 2px solid white;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>person Detection</h1>
+  <div id="video-container" style="position: relative; display: inline-block;">
+      <video id="video" autoplay style="border-radius:12px;"></video>
+      <canvas id="canvas"></canvas>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Ask for camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => { video.srcObject = stream; })
+      .catch(err => console.error("Camera access error:", err));
+
+    // Load model
+    cocoSsd.load().then(model => {
+      video.addEventListener('loadeddata', () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Scale factors
+        const scaleX = canvas.width / video.videoWidth;
+        const scaleY = canvas.height / video.videoHeight;
+
+        setInterval(() => {
+          model.detect(video).then(predictions => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            predictions.forEach(pred => {
+              const [x, y, w, h] = pred.bbox;
+              ctx.beginPath();
+              ctx.rect(x * scaleX, y * scaleY, w * scaleX, h * scaleY);
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = 'lime';
+              ctx.stroke();
+              ctx.fillStyle = 'lime';
+              ctx.fillText(
+                `${pred.class} (${Math.round(pred.score * 100)}%)`,
+                x * scaleX,
+                y * scaleY > 10 ? y * scaleY - 5 : 10
+              );
+            });
+          });
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>
