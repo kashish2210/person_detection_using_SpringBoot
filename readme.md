@@ -1,4 +1,4 @@
-# Spring Boot Login & Camera Detection App
+# Spring Boot Login & person Detection App
 
 A complete Spring Boot application featuring user authentication with PostgreSQL database integration and real-time camera object detection using TensorFlow.js.
 
@@ -21,16 +21,18 @@ java -version
 
 ### PostgreSQL Setup
 Ensure PostgreSQL is installed and running on your system.
-
-## Quick Start
-
-### 1. Database Configuration
-
+### after installation
+Run this command on ur terminal:
+```cmd
+psql -h localhost -U postgres -d postgres
+```
 Create the database:
 ```sql
 CREATE DATABASE loginapp;
 ```
+## Quick Start
 
+### 1. Database Configuration
 Configure `src/main/resources/application.properties`:
 ```properties
 spring.application.name=login
@@ -148,3 +150,9 @@ server.port=8081
 ## License
 
 This project is for educational purposes.
+## screenshots:
+<img width="1717" height="827" alt="image" src="https://github.com/user-attachments/assets/fb5eeeaa-c64a-4064-855a-eac0877bb97f" />
+<img width="1910" height="847" alt="image" src="https://github.com/user-attachments/assets/44b3a603-d4fb-4753-9c14-4753e2379b03" />
+<img width="1918" height="860" alt="image" src="https://github.com/user-attachments/assets/4e50623d-5e27-4a27-9f7c-77bd58e384e2" />
+<img width="1913" height="856" alt="image" src="https://github.com/user-attachments/assets/0b3b1bfd-95a5-48df-bff3-dff69690478f" />
+
